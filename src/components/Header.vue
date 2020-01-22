@@ -54,7 +54,27 @@
             <form class="uk-search uk-search-default uk-width-1-1" name="search-hero" onsubmit="return false;">
               <span data-uk-search-icon="ratio: 1.2"></span>
               <input id="search-hero" class="uk-search-input uk-form-large uk-border-rounded" type="search"
-                     placeholder="Search here" autocomplete="off" data-minchars="1" data-maxitems="30">
+                     placeholder="Search here"
+                     autocomplete="off"
+                     data-minchars="1"
+                     v-model="search"
+                     @input="onChange"
+              >
+              <div class="awesomplete">
+                <ul role="listbox" id="awesomplete_list_1" v-show="isOpen" class="autocomplete-results">
+                  <li role="option" aria-selected="true" id="awesomplete_list_1_item_0" v-for="(result, i) in results"
+                      :key="i"
+                      class="autocomplete-result"
+                      @click="closeSearch">
+                    <router-link
+                      v-bind:to="'/AcROCKnym/' + result.id"
+                      class="uk-link uk-link-hover2"
+                    >
+                      <span class="uk-text-bold">{{ result.acronym }}</span> - {{result.expansion}}
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
             </form>
           </div>
         </div>
@@ -67,7 +87,18 @@
 export default {
   name: 'Header',
   data () {
-    return {}
+    return {
+      search: '',
+      isOpen: false,
+      results: []
+    }
+  },
+  props: {
+    items: {
+      type: Array,
+      required: false,
+      default: () => ['a', ' b', 'c']
+    }
   },
   computed: {
     isLoggedIn: function () {
@@ -77,6 +108,26 @@ export default {
   methods: {
     logout: function () {
       this.$store.dispatch('logout')
+    },
+    onChange: function () {
+      this.isOpen = true
+      this.filterResults()
+    },
+    closeSearch: function () {
+      this.isOpen = false
+      this.search = ''
+    },
+    filterResults: function () {
+      this.$http({method: 'GET', url: '/api/acronyms/search?q=' + this.search}).then(
+        result => {
+          // console.log('get acronym', result.data)
+          this.results = result.data
+        },
+        // eslint-disable-next-line handle-callback-err
+        error => {
+          console.log('Error getting acronyms')
+        }
+      )
     }
   }
 }

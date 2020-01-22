@@ -34,8 +34,6 @@
                   <div v-if="acronym.previous">
                     <h5>{{acronym.previous.acronym}}</h5>
                     <div>
-<!--                      <div v-on:click="goTo(acronym.previous.id)">asdasd</div>-->
-
                       <router-link :to="{ name: 'ViewAcronym', params: { id: acronym.previous.id }}" class="uk-remove-underline hvr-back">
                         <i class="fa fa-arrow-left"></i>&nbsp;Previous
                       </router-link>

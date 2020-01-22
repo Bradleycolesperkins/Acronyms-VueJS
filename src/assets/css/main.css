@@ -148,6 +148,28 @@ a:hover,
   color: #583ABC;
   text-decoration: underline;
 }
+li.autocomplete-result:not(:hover) .uk-link.uk-link-hover2 {
+  color: #583ABC !important;
+}
+.uk-link.uk-link-hover2:hover {
+  color: #f9f9fc !important;
+  text-decoration: none !important;
+}
+li.autocomplete-result {
+  padding: 0px !important;
+}
+li.autocomplete-result .uk-link.uk-link-hover2 {
+  padding: 18px 36px;
+  width: 100%;
+  display: block;
+  clear: both;
+  overflow: auto;
+  position: relative;
+}
+li.autocomplete-result:hover {
+  background: #494ebe !important;
+  color: #f9f9fc !important;
+}
 
 /* Text-level semantics
  ========================================================================== */
