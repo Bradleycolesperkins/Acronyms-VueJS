@@ -97,7 +97,7 @@ export default {
     items: {
       type: Array,
       required: false,
-      default: () => ['a', ' b', 'c']
+      default: () => []
     }
   },
   computed: {

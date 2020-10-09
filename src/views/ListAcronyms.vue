@@ -28,8 +28,6 @@
               <div>
                 Written by {{acronym.user.name}}
                 <time class="uk-margin-small-right" datetime="2019-10-05">{{acronym.created_at}}</time>
-<!--                <br>-->
-<!--                Updated <time datetime="2019-12-30">December 30 2019</time>-->
               </div>
             </div>
           </div>
